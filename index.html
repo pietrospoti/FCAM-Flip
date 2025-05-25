@@ -3,7 +3,6 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Anteprima Camera</title>
   <style>
     body {
       background: #111;
@@ -25,11 +24,11 @@
   </style>
 </head>
 <body>
-  <h1>Anteprima Camera</h1>
-  <video id="camera" autoplay playsinline></video><br>
-  <button onclick="toggleMirror()">Specchia</button>
-  <button onclick="rotateVideo()">Ruota 90°</button>
-
+  <div style="width:800px;height:600px">
+    <video id="camera" autoplay playsinline></video><br>
+    <button onclick="toggleMirror()">Specchia</button>
+    <button onclick="rotateVideo()">Ruota 90°</button>
+  </div>
   <script>
     const video = document.getElementById('camera');
     let mirrored = false;
