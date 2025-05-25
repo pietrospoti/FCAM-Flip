@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Anteprima Camera</title>
+  <style>
+    body {
+      background: #111;
+      color: white;
+      text-align: center;
+      font-family: sans-serif;
+    }
+    video {
+      width: 90%;
+      max-width: 600px;
+      transform-origin: center center;
+      transition: transform 0.3s;
+    }
+    button {
+      margin: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Anteprima Camera</h1>
+  <video id="camera" autoplay playsinline></video><br>
+  <button onclick="toggleMirror()">Specchia</button>
+  <button onclick="rotateVideo()">Ruota 90°</button>
+
+  <script>
+    const video = document.getElementById('camera');
+    let mirrored = false;
+    let rotation = 0;
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        video.srcObject = stream;
+      })
+      .catch(err => {
+        alert('Accesso alla camera negato o non disponibile: ' + err);
+      });
+
+    function toggleMirror() {
+      mirrored = !mirrored;
+      updateTransform();
+    }
+
+    function rotateVideo() {
+      rotation = (rotation + 90) % 360;
+      updateTransform();
+    }
+
+    function updateTransform() {
+      let transform = `rotate(${rotation}deg)`;
+      if (mirrored) transform += ' scaleX(-1)';
+      video.style.transform = transform;
+    }
+  </script>
+</body>
+</html>
